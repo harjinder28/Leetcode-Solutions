@@ -1,0 +1,19 @@
+//Question- Binary Tree Right Side View
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        if(root==null)return new ArrayList<Integer>();
+        ArrayList<Integer> ans= new ArrayList<>();
+        ans.add(root.val);
+        helper(root,ans,0);
+        return ans;
+    }
+    public void helper(TreeNode root, ArrayList<Integer> ans,int i){
+        if(root==null)return;
+        if(i==ans.size()){
+            ans.add(root.val);
+        }
+        helper(root.right,ans,i+1);
+        helper(root.left,ans,i+1);
+    }
+}
