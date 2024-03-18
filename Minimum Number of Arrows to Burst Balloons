@@ -1,0 +1,24 @@
+//Question - Minimum Number of Arrows to Burst Balloons
+
+import java.util.*;
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] x,int[] y){
+                return Integer.compare(x[1],y[1]);
+            }
+        });
+        int arrow=1;
+        int n=points.length;
+        int prevEnd=points[0][1];
+        for(int i=1;i<n;i++){
+            // System.out.print(points[i][0]+" "+ points[i][1]+" ");
+            if(points[i][0]>prevEnd){
+                arrow++;
+                prevEnd =points[i][1];
+                }
+        }
+        return arrow;
+    }
+}
