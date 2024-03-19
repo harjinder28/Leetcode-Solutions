@@ -1,0 +1,22 @@
+// Question - Task Schedular
+//You are given an array of CPU tasks, each represented by letters A to Z, and a cooling time, n. Each cycle or interval allows the completion of one task. Tasks can be completed in any order, but there's a constraint: identical tasks must be separated by at least n intervals due to cooling time.
+
+//​Return the minimum number of intervals required to complete all tasks.
+
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        char[] charMap= new char[26];
+        for(char c:tasks){
+            charMap[c-'A']++;
+        }
+        Arrays.sort(charMap);
+        int maxIdle=charMap[25]-1;
+        int idle=maxIdle*n;
+        for(int i=24;i>=0;i--){
+            idle-= Math.min(charMap[i],maxIdle);
+            // idle-= charMap[i]+1;
+        }
+        return idle>0?idle+tasks.length:tasks.length;
+    }
+}
