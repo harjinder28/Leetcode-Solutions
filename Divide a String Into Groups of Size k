@@ -1,0 +1,22 @@
+// Question - Divide a String Into Groups of Size k
+
+class Solution {
+    public String[] divideString(String s, int k, char fill) {
+        int left=s.length()%k;
+        StringBuilder st=new StringBuilder(s);
+        int n=st.length()/k;
+        if(left!=0){
+            n+=1;
+        for(int i=0;i<k-left;i++){
+            st.append(fill);
+        }
+        }
+        String[] ans=new String[n];
+        // System.out.print(st.toString());
+        for(int i=0;i<st.length();i+=k){
+            ans[i/k]=st.substring(i,i+k).toString();
+            // i+=k;
+        }
+    return ans;
+    }
+}
