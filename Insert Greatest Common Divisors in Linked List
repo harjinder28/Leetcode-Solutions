@@ -1,0 +1,29 @@
+// Question - Insert Greatest Common Divisors in Linked List
+
+class Solution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode temp=head;
+        if(head==null)return null;
+        while(temp.next!=null){
+            int a=temp.val;
+            int b=temp.next.val;
+            ListNode n=new ListNode(gcd(a,b));
+            n.next=temp.next;
+            temp.next=n;
+            temp=n.next;
+        }
+        return head;
+    }
+    public int gcd(int a,int b){
+        while(a>0 && b>0){
+            if(a>b){
+                a=a%b;
+            }
+            else{
+                b=b%a;
+            }
+        }
+        if(a==0)return b;
+        return a;
+    }
+}
