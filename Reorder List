@@ -1,21 +1,41 @@
 // Question - Reorder List
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    public int countSegments(String s) {
-        if(s.length()==0)return 0;
-        int seg=0;
-        for(int i=0;i<s.length();i++){
-            while(i<s.length() && s.charAt(i)==' '){
-                i++;
-            }
-            if(i==s.length())break;
-            while(i<s.length() && s.charAt(i)!=' ' ){
-                i++;
-            }
-            // if(i<s.length()+1)
-            seg++;
+    public void reorderList(ListNode head) {
+        Stack<ListNode> st=new Stack<>();
+        ListNode temp=head;
+        while(temp!=null){
+            st.push(temp);
+            temp=temp.next;
         }
-        return seg;
-        // return s.split(" ").length;
+        temp=head;
+        while(temp!=st.peek() && temp!=temp.next){
+            ListNode n=st.pop();
+            n.next=temp.next;
+            temp.next=n;
+            temp=n.next;
+        }
+        // if(temp.next==st.peek()){
+        //     ListNode n=st.pop();
+        //     n.next=temp.next;
+        //     temp.next=n;
+        // }
+        temp.next=null;
+        // return head;
+        temp=head;
+        while(temp!=null){
+            System.out.print(temp.val+" ");
+            temp=temp.next;
+        }
     }
 }
