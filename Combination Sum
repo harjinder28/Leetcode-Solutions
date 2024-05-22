@@ -1,0 +1,28 @@
+//Question - Combination Sum
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        List<List<Integer>> ans=new ArrayList();
+        List<Integer> ds=new ArrayList<Integer>();
+        helper(0,ds,ans,candidates,target,0);
+        return ans;
+    }
+    public void helper(int i,List<Integer> ds,List<List<Integer>> ans,int[] candidates,int k,int sum){
+        if(i>=candidates.length){
+            if(sum==k){
+                ans.add(new ArrayList(ds));
+            }
+            return;
+        }
+        if(sum>k)return;
+
+        ds.add(candidates[i]);
+        sum+=candidates[i];
+        helper(i,ds,ans,candidates,k,sum);
+        ds.remove(ds.size()-1);
+        sum-=candidates[i];
+
+        helper(i+1,ds,ans,candidates,k,sum);
+    }
+}
